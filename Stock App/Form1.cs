@@ -103,7 +103,7 @@ namespace Stock_App
         {
             try
             {
-                sqlConn = new MySqlConnection("Server = 45.18.120.169; Port = 3306; Database = stockproject; Uid = Watchtower; Pwd = Jasper3221;");
+                sqlConn = new MySqlConnection("Server = 45.18.120.169; Port= 3306; Database = stockproject; Uid = Christian Smola; Pwd = Jasper3221;");
                 sqlConn.Open();
                 Console.WriteLine("Connected to SQL");
             }
@@ -573,6 +573,21 @@ namespace Stock_App
         private void btnSaveTodaysDataToServer_Click(object sender, EventArgs e)
         {
             SaveDataToSQL();
+            //these should be moved to their proper subroutines
+            dataGridView1.Rows.Clear();
+            dataGridView1.Columns.Clear();
+
+            OldDataCollection.Clear();
+            OldDataDateUploadedList.Clear();
+            
+            StockCollection.Clear();
+            CompanyCollection.Clear();
+            
+            dataGridView1.Columns.Add("colSymbol", "Symbol");
+            GetDataFromSQL();
+            RetrieveAndParseDataFromAPI();
+            DisplayDataToUser();
+            AnalyzeChangeOverTime();
         }
 
         private void btnUpdateDividendData_Click(object sender, EventArgs e)
